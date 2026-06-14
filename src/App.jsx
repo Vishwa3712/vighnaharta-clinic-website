@@ -822,27 +822,11 @@ export default function VighnahartaClinic() {
               <div className="vc-footer-title">Quick Links</div>
               {NAV_LINKS.map(l => <button key={l} className="vc-footer-link" onClick={() => scrollTo(l)}>{l}</button>)}
             </div>
-            <div>
-              <div className="vc-footer-title">Contact</div>
-              <div className="vc-footer-info">
-                📍 {CLINIC.address}<br/>
-                📞 <a href={`tel:${CLINIC.phone}`}>{CLINIC.phoneDisplay}</a><br/>
-                📧 <a href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
-              </div>
-            </div>
-            <div>
-              <div className="vc-footer-title">Timings</div>
-              <div className="vc-footer-info">
-                🌅 {CLINIC.timings.morning}<br/>
-                🌆 {CLINIC.timings.evening}<br/>
-                📅 {CLINIC.days}<br/>
-                🚨 Emergency: <a href={`tel:${CLINIC.phone}`} style={{color:"#e57373",fontWeight:700}}>{CLINIC.phoneDisplay}</a>
-              </div>
-            </div>
+            
           </div>
           <div className="vc-footer-bottom">
-            <span className="vc-footer-copy">© 2025 {CLINIC.name}. All rights reserved.</span>
-            <span className="vc-footer-copy">Built with ❤️ for the community</span>
+            <span className="vc-footer-copy">© 2026 {CLINIC.name}. All rights reserved.</span>
+            <span className="vc-footer-copy">Built with ❤️ By Vishwa</span>
           </div>
         </div>
       </footer>
