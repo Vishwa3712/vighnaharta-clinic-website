@@ -78,7 +78,7 @@ a{text-decoration:none;}
 .vc-check-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;}
 .vc-check-icon{width:22px;height:22px;min-width:22px;background:#2eaa7e;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;margin-top:1px;}
 .vc-check-text{font-size:15px;color:#1a2535;font-weight:500;line-height:1.5;}
-.vc-stat-cards{display:flex;flex-direction:column;gap:12px;}
+.vc-stat-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
 .vc-stat-card{background:#fff;border-radius:14px;padding:14px 18px;border:1.5px solid #dde6f0;display:flex;align-items:center;gap:14px;}
 .vc-stat-card-icon{font-size:30px;flex-shrink:0;}
 .vc-stat-card-title{font-weight:800;color:#135d8a;font-size:16px;}
@@ -204,9 +204,6 @@ a{text-decoration:none;}
 .vc-footer-copy{color:#4a6a84;font-size:13px;}
 
 /* Float buttons */
-.vc-float-wa{position:fixed;bottom:24px;right:24px;z-index:999;background:#25d366;border-radius:50%;width:58px;height:58px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;}
-.vc-float-call{position:fixed;bottom:92px;right:24px;z-index:999;background:#1a7fba;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 20px rgba(26,127,186,.4);text-decoration:none;}
-.vc-float-review{position:fixed;bottom:160px;right:24px;z-index:999;background:#ffb703;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(255,183,3,.35);text-decoration:none;color:#1a1a1a;}
 
 /* ========== TABLET (max 1024px) ========== */
 @media(max-width:1024px){
@@ -258,8 +255,6 @@ a{text-decoration:none;}
   .vc-footer-grid{grid-template-columns:1fr;gap:20px;}
   .vc-footer-inner{padding:32px 16px 20px;}
   .vc-footer-bottom{flex-direction:column;text-align:center;}
-  .vc-float-wa{width:52px;height:52px;font-size:24px;bottom:20px;right:16px;}
-  .vc-float-call{width:46px;height:46px;font-size:20px;bottom:80px;right:16px;}
   .vc-clinic-card{padding:20px;}
   .vc-timing-val{font-size:13px;}
 }
@@ -411,6 +406,19 @@ export default function VighnahartaClinic() {
 
   const handleForm = (e) => {
     e.preventDefault();
+
+    const messageLines = [
+      "Hello, I would like to book an appointment.",
+      `Name: ${formData.name}`,
+      `Phone: ${formData.phone}`,
+      formData.date ? `Date: ${formData.date}` : "",
+      formData.time ? `Time: ${formData.time}` : "",
+      formData.notes ? `Notes: ${formData.notes}` : "",
+    ].filter(Boolean);
+
+    const waLink = `https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent(messageLines.join("\n"))}`;
+    window.location.href = waLink;
+
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
     setFormData({ name: "", phone: "", date: "", time: "", notes: "" });
@@ -838,11 +846,6 @@ export default function VighnahartaClinic() {
           </div>
         </div>
       </footer>
-
-      {/* Floating buttons */}
-      <a href={REVIEW_LINK} target="_blank" rel="noreferrer" className="vc-float-review" title="Leave a Review">⭐</a>
-      <a href={waUrl} target="_blank" rel="noreferrer" className="vc-float-wa" title="WhatsApp Us">💬</a>
-      <a href={`tel:${CLINIC.phone}`} className="vc-float-call" title="Call Us">📞</a>
     </div>
   );
 }
